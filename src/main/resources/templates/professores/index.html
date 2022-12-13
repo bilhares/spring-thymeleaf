@@ -40,7 +40,8 @@
 								<a th:href="@{/professores/{id}(id=${p.id})}" class="btn" data-toggle="tooltip" data-placement="top" title="Detalhes" tabindex="-1" role="button">
 									<i class="fa fa-search"></i>
 								</a>
-								<a class="btn" data-bs-toggle="modal" th:attr="data-bs-target='#modal-exclusao'+${p.id}" data-toggle="tooltip" data-placement="top" title="Excluir" tabindex="-1" role="button">
+								<a class="btn" data-bs-toggle="modal" th:attr="data-bs-target='#modal-exclusao'+${p.id}" data-toggle="tooltip" data-placement="top" title="Excluir" tabindex="-1"
+									role="button">
 									<i class="fa fa-trash"></i>
 								</a>
 								<div th:replace="~{modal :: modal(${p.id}, ${p.nome})}"></div>
@@ -52,9 +53,6 @@
 		</div>
 		<div class="row">
 			<div class="col-3">
-				<!-- <button type="button" class="btn btn-primary">Novo
-					Professor</button> -->
-
 				<a href="/professores/new" class="btn btn-primary" tabindex="-1" role="button">Novo Professor</a>
 			</div>
 		</div>
