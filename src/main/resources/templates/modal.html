@@ -1,0 +1,19 @@
+<div th:fragment="modal(id, nome)">
+	<div class="modal fade" th:attr="id='modal-exclusao'+${id}" tabindex="-1" aria-labelledby="modal-exclusao" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h1 class="modal-title fs-5" id="exampleModalLabel">Excluir</h1>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<span th:text="${'Deseja excluir '+nome+'?'}"></span>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+					<a th:href="@{/professores/{id}/delete(id=${id})}" type="button" class="btn btn-primary">Sim, excluir</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
