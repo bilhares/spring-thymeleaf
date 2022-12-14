@@ -3,6 +3,8 @@ package com.projeto.controller;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -18,8 +20,6 @@ import com.projeto.dto.NovoProfessorDTO;
 import com.projeto.model.Professor;
 import com.projeto.model.StatusProfessor;
 import com.projeto.repositories.ProfessorRepository;
-
-import jakarta.validation.Valid;
 
 @Controller
 @RequestMapping("/professores")
