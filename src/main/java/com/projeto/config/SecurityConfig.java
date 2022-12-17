@@ -17,9 +17,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().antMatchers("/css/**").permitAll().antMatchers("/", "/home").permitAll().anyRequest()
-				.authenticated().and().formLogin().loginPage("/login").defaultSuccessUrl("/").failureUrl("/login-error")
-				.permitAll().and().logout().logoutSuccessUrl("/");
+		http.authorizeRequests().antMatchers("/css/**").permitAll().antMatchers("/", "/home").permitAll()
+
+				.antMatchers("/usuario/**").hasAuthority("ADMIN").antMatchers("/perfil/**").hasAuthority("USUARIO")
+
+				.anyRequest().authenticated().and().formLogin().loginPage("/login").defaultSuccessUrl("/")
+				.failureUrl("/login-error").permitAll().and().logout().logoutSuccessUrl("/")
+
+				.and().exceptionHandling().accessDeniedPage("/acesso-negado");
 	}
 
 	@Override
