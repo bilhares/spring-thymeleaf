@@ -32,4 +32,13 @@ public class Perfil {
 	public void setDesc(String desc) {
 		this.desc = desc;
 	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 }
