@@ -1,0 +1,81 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragmentos :: head('Alunos')}">
+</head>
+<body>
+
+	<div th:replace="~{fragmentos ::menu('Controle de alunos', 'alunos')}"></div>
+
+	<div class="container mt-4 mb-4">
+		<div class="col-12">
+			<span th:styleappend="${param.erro == null || param.mensagem == null ? 'display:none;' : ''}"
+				th:classappend="${param.erro !=null && param.erro ? 'error-message' : 'success-message'}" th:text="${param.mensagem != null ? param.mensagem : ''}">Mensagem</span>
+		</div>
+	</div>
+
+	<div class="container">
+		<div class="row">
+
+			<div class="col-12">
+
+				<!-- <h1 th:text="${alunoId}"></h1> -->
+				<form class="row g-3" th:object="${novoAlunoDTO}" th:action="@{ ${alunoId} == null ? '/alunos/salvar' : '/alunos/'+${alunoId}  }" method="POST" novalidate>
+					<div class="col-md-2">
+						<label for="nome" class="form-label">Nome</label>
+						<input type="text" class="form-control" id="nome" th:field="*{nome}" maxlength="100" th:errorclass="is-invalid">
+						<div class="invalid-feedback d-block" th:errors="*{nome}"></div>
+					</div>
+					<div class="col-md-2">
+						<label for="cpf" class="form-label">CPF</label>
+						<input type="text" class="form-control" id="cpf" th:field="*{cpf}" maxlength="11" th:errorclass="is-invalid">
+						<div class="invalid-feedback d-block" th:errors="*{cpf}"></div>
+					</div>
+					<div class="col-12">
+						<button type="submit" class="btn btn-primary">
+							Salvar
+							<i class="fa fa-floppy-o" aria-hidden="true"></i>
+						</button>
+					</div>
+				</form>
+
+				<div class="row mt-4">
+					<h2>Lista</h2>
+					<table class="table table-hover">
+						<thead>
+							<tr>
+								<th scope="col">Id</th>
+								<th scope="col">Nome</th>
+								<th scope="col">Cpf</th>
+								<th scope="col">Ações</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="p : ${alunos}">
+								<th scope="row" th:text="${p.id}"></th>
+								<td th:text="${p.nome}"></td>
+								<td th:text="${p.cpf}"></td>
+								<td>
+									<a th:href="@{/alunos/{id}/edit(id=${p.id})}" class="btn" data-toggle="tooltip" data-placement="top" title="Editar" tabindex="-1" role="button">
+										<i class="fa fa-file"></i>
+									</a>
+									<a th:href="@{/alunos/{id}(id=${p.id})}" class="btn" data-toggle="tooltip" data-placement="top" title="Detalhes" tabindex="-1" role="button">
+										<i class="fa fa-search"></i>
+									</a>
+									<a class="btn" data-bs-toggle="modal" th:attr="data-bs-target='#modal-exclusao'+${p.id}" data-toggle="tooltip" data-placement="top" title="Excluir" tabindex="-1"
+										role="button">
+										<i class="fa fa-trash"></i>
+									</a>
+									<div th:replace="~{modal :: modal(${p.id}, ${p.nome})}"></div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+
+</body>
+</html>
