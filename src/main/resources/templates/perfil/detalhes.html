@@ -5,7 +5,10 @@
 <body>
 	<div th:replace="~{fragmentos ::menu('Detalhes do perfil', 'professores')}"></div>
 
-	<h3>Detalhes</h3>
+	<div class="container mt-4">
+		<h3 th:text="'usuario: #'+${user.id}"></h3>
+		<p th:text="${user.email}"></p>
+	</div>
 
 </body>
 </html>
