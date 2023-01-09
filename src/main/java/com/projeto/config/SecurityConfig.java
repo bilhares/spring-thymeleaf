@@ -1,6 +1,7 @@
 package com.projeto.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -20,6 +21,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests().antMatchers("/css/**").permitAll().antMatchers("/", "/home").permitAll()
 
 				.antMatchers("/usuario/**").hasAuthority("ADMIN").antMatchers("/perfil/**").hasAuthority("USUARIO")
+				.antMatchers("/professores/*/delete", "/professores/new", "/professores/*/edit").hasAnyAuthority("ADMIN")
+				.antMatchers(HttpMethod.POST, "/professores").hasAnyAuthority("ADMIN")
+				.antMatchers(HttpMethod.POST, "/professores/*").hasAnyAuthority("ADMIN")
 
 				.anyRequest().authenticated().and().formLogin().loginPage("/login").defaultSuccessUrl("/")
 				.failureUrl("/login-error").permitAll().and().logout().logoutSuccessUrl("/")

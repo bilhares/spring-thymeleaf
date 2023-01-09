@@ -22,10 +22,10 @@
 			</button>
 			<div id="navbarCollapse" class="collapse navbar-collapse">
 				<ul class="nav navbar-nav">
-					<li class="nav-item">
+					<li class="nav-item" sec:authorize="hasAuthority('USUARIO')">
 						<a th:href="@{/perfil}" class="nav-link">Perfil</a>
 					</li>
-					<li class="nav-item dropdown">
+					<li class="nav-item dropdown" sec:authorize="hasAuthority('ADMIN')">
 						<a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Cadastros</a>
 						<div class="dropdown-menu">
 							<a th:href="@{/usuario/novo}" class="dropdown-item">Usuário</a>

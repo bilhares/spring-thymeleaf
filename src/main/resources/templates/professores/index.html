@@ -34,14 +34,16 @@
 							<td th:text="${p.salario}"></td>
 							<td th:text="${p.statusProfessor}"></td>
 							<td>
-								<a th:href="@{/professores/{id}/edit(id=${p.id})}" class="btn" data-toggle="tooltip" data-placement="top" title="Editar" tabindex="-1" role="button">
-									<i class="fa fa-file"></i>
-								</a>
 								<a th:href="@{/professores/{id}(id=${p.id})}" class="btn" data-toggle="tooltip" data-placement="top" title="Detalhes" tabindex="-1" role="button">
 									<i class="fa fa-search"></i>
 								</a>
+								<a th:href="@{/professores/{id}/edit(id=${p.id})}" class="btn" data-toggle="tooltip" data-placement="top" title="Editar" tabindex="-1" role="button"
+									sec:authorize="hasAuthority('ADMIN')">
+									<i class="fa fa-file"></i>
+								</a>
+
 								<a class="btn" data-bs-toggle="modal" th:attr="data-bs-target='#modal-exclusao'+${p.id}" data-toggle="tooltip" data-placement="top" title="Excluir" tabindex="-1"
-									role="button">
+									role="button" sec:authorize="hasAuthority('ADMIN')">
 									<i class="fa fa-trash"></i>
 								</a>
 								<div th:replace="~{modal :: modal(${p.id}, ${p.nome})}"></div>

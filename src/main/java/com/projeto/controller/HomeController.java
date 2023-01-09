@@ -18,6 +18,11 @@ public class HomeController {
 	public String login() {
 		return "login";
 	}
+	
+	@GetMapping("/novo-cadastro")
+	public String novoCadastro() {
+		return "register";
+	}
 
 	@GetMapping("/login-error")
 	public ModelAndView loginError() {
