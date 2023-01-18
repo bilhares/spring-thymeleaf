@@ -34,6 +34,7 @@
 				</ul>
 				<ul class="nav navbar-nav ms-auto">
 					<a sec:authorize="!isAuthenticated()" href="/login" class="btn btn-primary" tabindex="-1" role="button">Login</a>
+					<a sec:authorize="!isAuthenticated()" href="/novo-cadastro" class="btn btn-warning" tabindex="-1" role="button">Cadastrar</a>
 				</ul>
 				<form sec:authorize="isAuthenticated()" class="d-flex" th:action="@{/logout}" method="post">
 					<button class="btn btn-outline-success" type="submit">Logout</button>

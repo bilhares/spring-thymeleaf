@@ -19,10 +19,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests().antMatchers("/css/**").permitAll().antMatchers("/", "/home").permitAll()
+				.antMatchers("/novo-cadastro/**").permitAll()
+				.antMatchers("/confirmacao/cadastro/**").permitAll()
 
 				.antMatchers("/usuario/**").hasAuthority("ADMIN").antMatchers("/perfil/**").hasAuthority("USUARIO")
-				.antMatchers("/professores/*/delete", "/professores/new", "/professores/*/edit").hasAnyAuthority("ADMIN")
-				.antMatchers(HttpMethod.POST, "/professores").hasAnyAuthority("ADMIN")
+				.antMatchers("/professores/*/delete", "/professores/new", "/professores/*/edit")
+				.hasAnyAuthority("ADMIN").antMatchers(HttpMethod.POST, "/professores").hasAnyAuthority("ADMIN")
 				.antMatchers(HttpMethod.POST, "/professores/*").hasAnyAuthority("ADMIN")
 
 				.anyRequest().authenticated().and().formLogin().loginPage("/login").defaultSuccessUrl("/")
