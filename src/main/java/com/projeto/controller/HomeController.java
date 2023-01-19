@@ -106,6 +106,16 @@ public class HomeController {
 		return "recuperar-senha";
 	}
 
+	@GetMapping("/expired")
+	public String sessaoExpirada(ModelMap model) {
+
+		model.addAttribute("alerta", "erro");
+		model.addAttribute("titulo", "Acesso recusado");
+		model.addAttribute("texto", "Sua sessão expirou");
+		model.addAttribute("subtext", "Voce logou em outro dispositivo");
+		return "login";
+	}
+
 	@PostMapping("/redefinir/senha/novo")
 	public String confirmacaoDeRedefinicaoDeSenha(Usuario u, ModelMap model) {
 		Usuario user = usuarioService.buscarPorEmail(u.getEmail());
