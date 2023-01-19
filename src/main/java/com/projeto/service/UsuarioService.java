@@ -3,6 +3,9 @@ package com.projeto.service;
 import java.util.List;
 import java.util.Optional;
 
+import javax.mail.MessagingException;
+
+import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.User;
@@ -17,11 +20,16 @@ import com.projeto.model.Perfil;
 import com.projeto.model.Usuario;
 import com.projeto.repositories.UsuarioRepository;
 
+import net.bytebuddy.utility.RandomString;
+
 @Service
 public class UsuarioService implements UserDetailsService {
 
 	@Autowired
 	UsuarioRepository usuarioRepository;
+
+	@Autowired
+	EmailService emailService;
 
 	@Transactional(readOnly = true)
 	public Usuario buscarPorEmail(String email) {
@@ -62,5 +70,17 @@ public class UsuarioService implements UserDetailsService {
 			throw new UsernameNotFoundException("Usuário não encontrado");
 		}
 		u.setAtivo(true);
+	}
+
+	@Transactional(readOnly = false)
+	public void pedidoRedefinicaoSenha(String email) throws MessagingException {
+		Usuario usuario = buscarPorEmailAtivo(email)
+				.orElseThrow(() -> new UsernameNotFoundException("Usuário não encontrado"));
+
+		String verificador = RandomStringUtils.randomAlphanumeric(6);
+
+		usuario.setCodigoVerificador(verificador);
+
+		emailService.enviarPedidoDeRedefinicaoDeSenha(email, verificador);
 	}
 }

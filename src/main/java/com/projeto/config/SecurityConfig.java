@@ -19,8 +19,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests().antMatchers("/css/**").permitAll().antMatchers("/", "/home").permitAll()
-				.antMatchers("/novo-cadastro/**").permitAll()
-				.antMatchers("/confirmacao/cadastro/**").permitAll()
+				.antMatchers("/novo-cadastro/**").permitAll().antMatchers("/confirmacao/cadastro/**").permitAll()
+				.antMatchers("/solicitar/redefinir/senha").permitAll().antMatchers("/redefinir/senha").permitAll()
+				.antMatchers("/redefinir/senha/novo").permitAll()
 
 				.antMatchers("/usuario/**").hasAuthority("ADMIN").antMatchers("/perfil/**").hasAuthority("USUARIO")
 				.antMatchers("/professores/*/delete", "/professores/new", "/professores/*/edit")
@@ -30,7 +31,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.anyRequest().authenticated().and().formLogin().loginPage("/login").defaultSuccessUrl("/")
 				.failureUrl("/login-error").permitAll().and().logout().logoutSuccessUrl("/")
 
-				.and().exceptionHandling().accessDeniedPage("/acesso-negado");
+				.and().exceptionHandling().accessDeniedPage("/acesso-negado").and().rememberMe();
 	}
 
 	@Override
