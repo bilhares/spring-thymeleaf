@@ -3,7 +3,7 @@ package com.projeto.service;
 import java.util.List;
 import java.util.Optional;
 
-import javax.mail.MessagingException;
+import jakarta.mail.MessagingException;
 
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +19,6 @@ import org.springframework.util.Base64Utils;
 import com.projeto.model.Perfil;
 import com.projeto.model.Usuario;
 import com.projeto.repositories.UsuarioRepository;
-
-import net.bytebuddy.utility.RandomString;
 
 @Service
 public class UsuarioService implements UserDetailsService {
